@@ -2,6 +2,7 @@ package com.example.assen.myapplication;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
@@ -62,8 +63,18 @@ public class AnswerActivity extends AppCompatActivity {
                 });
                 int starColor= Color.parseColor("#FFDEAD");//起始颜色
                 int endColor=Color.parseColor("#FF4500");
-                moneyAnimator.setDuration(10000);
-                moneyAnimator.start();
+                ValueAnimator colorAnimator=ValueAnimator.ofArgb(starColor,endColor);
+                colorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        int color=(int)animation.getAnimatedValue();
+                        mAnswer_text_View.setTextColor(color);
+                    }
+                });
+                AnimatorSet Set=new AnimatorSet();//创建组合动画对象
+                Set.playTogether(moneyAnimator,colorAnimator);//将两个动画组合
+                Set.setDuration(10000);//动画持续时间
+                Set.start();//启动动画
             }
 
             @Override
