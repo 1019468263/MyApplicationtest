@@ -74,7 +74,7 @@ public class AnswerActivity extends AppCompatActivity {
                 AnimatorSet Set=new AnimatorSet();//创建组合动画对象
                 Set.playTogether(moneyAnimator,colorAnimator);//将两个动画组合
                 Set.setDuration(10000);//动画持续时间
-                Set.start();//启动动画
+                Set.start();
             }
 
             @Override
